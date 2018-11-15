@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UsersServlet extends HttpServlet {
 
@@ -23,17 +23,29 @@ public class UsersServlet extends HttpServlet {
         resp.addHeader("Content-Type", "text/html");
         PrintWriter writer = resp.getWriter();
 
-        createForm(writer);
+        createCreationForm(writer);
+        writer.println("<br>");
+        createQueryForm(writer);
+        // 1. napisac form na GET (action="") z polem tekstowym q
 
-        List<User> users = usersService.findAll();
+        String query = Optional.ofNullable(req.getParameter("q"))
+                .orElse("");
+
+        List<User> users = usersService.findByQuery(query);
 
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
 
-            writer.println("<a href=\"" + req.getContextPath() + req.getServletPath() + "/" + i + "\">");
+            writer.println("<a href=\"" + req.getContextPath() + req.getServletPath() + "/" + user.getId() + "\">");
             writer.println("<p>" + user.getFirstName() + " " + user.getLastName() + "</p>");
             writer.println("</a>");
         }
+    }
+
+    private void createQueryForm(PrintWriter writer) {
+        writer.println("<form action=\"\">\n" +
+                "    Search: <input type=\"text\" name=\"q\"> <input type=\"submit\">\n" +
+                "</form>");
     }
 
     @Override
@@ -49,7 +61,7 @@ public class UsersServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + req.getServletPath());
     }
 
-    private void createForm(PrintWriter writer) {
+    private void createCreationForm(PrintWriter writer) {
         String form = "<form action=\"\" method=\"post\">\n" +
                 "    First Name: <input type=\"text\" name=\"firstName\"><br>\n" +
                 "    Last Name: <input type=\"text\" name=\"lastName\"><br>\n" +
