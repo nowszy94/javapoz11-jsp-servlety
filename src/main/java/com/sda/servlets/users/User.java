@@ -1,5 +1,8 @@
 package com.sda.servlets.users;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class User {
     private Integer id;
     private String firstName;
@@ -11,7 +14,13 @@ public class User {
         this(null, firstName, lastName, age, gender);
     }
 
-    public User(Integer id, String firstName, String lastName, Integer age, UserGender gender) {
+    @JsonCreator
+    public User(
+            @JsonProperty("id") Integer id,
+            @JsonProperty("firstName") String firstName,
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("age") Integer age,
+            @JsonProperty("gender") UserGender gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
