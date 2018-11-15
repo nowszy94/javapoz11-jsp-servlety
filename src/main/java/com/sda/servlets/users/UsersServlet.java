@@ -11,14 +11,11 @@ import java.util.List;
 
 public class UsersServlet extends HttpServlet {
 
-    private List<User> users;
+    private UsersService usersService;
 
     @Override
     public void init() throws ServletException {
-        this.users = new ArrayList<>();
-
-        this.users.add(new User("Szymon", "Nowak", 55, UserGender.Male));
-        this.users.add(new User("Anna", "Kowalska", 33, UserGender.Female));
+        this.usersService = UsersService.instanceOf();
     }
 
     @Override
@@ -28,9 +25,15 @@ public class UsersServlet extends HttpServlet {
 
         createForm(writer);
 
-        users.forEach(user -> {
-            writer.println("<p>" + user.getFirstName() + " " + user.getLastName() + "(" + user.getGender() + ") Age: " + user.getAge() + "</p>");
-        });
+        List<User> users = usersService.findAll();
+
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+
+            writer.println("<a href=\"" + req.getContextPath() + req.getServletPath() + "/" + i + "\">");
+            writer.println("<p>" + user.getFirstName() + " " + user.getLastName() + "</p>");
+            writer.println("</a>");
+        }
     }
 
     @Override
@@ -41,7 +44,7 @@ public class UsersServlet extends HttpServlet {
         Integer age = Integer.valueOf(req.getParameter("age"));
 
         User user = new User(firstName, lastName, age, gender);
-        users.add(user);
+        usersService.save(user);
 
         resp.sendRedirect(req.getContextPath() + req.getServletPath());
     }
