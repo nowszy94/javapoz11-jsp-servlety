@@ -1,4 +1,4 @@
-package com.sda.servlets;
+package com.sda.servlets.links;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,15 +11,11 @@ import java.util.List;
 
 public class LinksServlet extends HttpServlet {
 
-    private List<Link> links;
+    private LinksService linksService;
 
     @Override
     public void init() throws ServletException {
-        this.links = new ArrayList<>();
-
-        links.add(new Link("http://www.google.com", "Google"));
-        links.add(new Link("http://pl.wikipedia.com", "Wikipedia"));
-        links.add(new Link("http://onet.pl", "Onet"));
+        this.linksService = LinksService.instanceOf();
     }
 
     @Override
@@ -38,7 +34,7 @@ public class LinksServlet extends HttpServlet {
         createForm(writer);
 
         writer.println("Moje linki:");
-        for (Link link : links) {
+        for (Link link : linksService.findAll()) {
             writer.println("<br/>");
             writer.println("<a href=\"" + link.getUrl() + "\">" + link.getText() + "</a>");
         }
@@ -69,7 +65,7 @@ public class LinksServlet extends HttpServlet {
             redirectBuilder.append("?error_message=Bledne dane");
         } else {
             Link linkObject = new Link(link, text);
-            links.add(linkObject);
+            linksService.save(linkObject);
         }
         resp.sendRedirect(redirectBuilder.toString());
     }

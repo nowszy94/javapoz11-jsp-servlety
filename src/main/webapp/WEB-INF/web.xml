@@ -9,7 +9,11 @@
     </servlet>
     <servlet>
         <servlet-name>LinksServlet</servlet-name>
-        <servlet-class>com.sda.servlets.LinksServlet</servlet-class>
+        <servlet-class>com.sda.servlets.links.LinksServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LinkServlet</servlet-name>
+        <servlet-class>com.sda.servlets.links.LinkServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>LinksServlet</servlet-name>
         <url-pattern>/links</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LinkServlet</servlet-name>
+        <url-pattern>/links/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
