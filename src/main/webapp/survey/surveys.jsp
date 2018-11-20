@@ -12,7 +12,12 @@
             flex-direction: column;
             align-items: center;
         }
-
+        .new-question-button {
+            padding: 2px;
+            background-color: gray;
+            border: 1px solid black;
+            border-radius: 1px;
+        }
     </style>
 </head>
 <body>
@@ -35,36 +40,41 @@
 <form action="" method="post" class="form">
     <div>Title: <input type="text" name="title"> <br></div>
     <div>Description: <textarea name="description" id="" cols="30" rows="10"></textarea></div>
-    <div class="form">
-        <div class="form">
-            <h2>Question1:</h2>
-            <div>
-                Text: <input type="text" name="question1text">
-            </div>
-            <div>
-                Answers <input type="text" name="question1answer1">,
-                <input type="text" name="question1answer2">,
-                <input type="text" name="question1answer3">,
-                <input type="text" name="question1answer4">
-            </div>
-        </div>
-        <div class="form">
-            <h2>Question2:</h2>
-            <div>
-                Text: <input type="text" name="question2text">
-            </div>
-            <div>
-                Answers <input type="text" name="question2answer1">,
-                <input type="text" name="question2answer2">,
-                <input type="text" name="question2answer3">,
-                <input type="text" name="question2answer4">
-            </div>
-        </div>
+    <div class="form" id="questions">
+
     </div>
+
+    <p class="new-question-button" onclick="addQuestion()">Add question</p>
 
     <input type="submit" value="Dodaj">
 </form>
 
+<script>
+    var questionId = 1;
 
+    function removeQuestion(e) {
+        e.element
+    }
+
+    function addQuestion() {
+        var question = document.createElement('div');
+        question.className = 'form';
+        question.innerHTML = `
+            <h2>Question\${questionId}: <span onclick="removeQuestion(event)">Usun</span></h2>
+            <div>
+                Text: <input type="text" name="question\${questionId}text">
+            </div>
+            <div>
+                Answers <input type="text" name="question\${questionId}answer1">,
+                <input type="text" name="question\${questionId}answer2">,
+                <input type="text" name="question\${questionId}answer3">,
+                <input type="text" name="question\${questionId}answer4">
+            </div>
+        `;
+        questionId++;
+        document.getElementById('questions').appendChild(question);
+    }
+    addQuestion();
+</script>
 </body>
 </html>

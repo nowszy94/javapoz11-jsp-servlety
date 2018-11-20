@@ -1,0 +1,106 @@
+<html>
+<head>
+</head>
+<body>
+
+<div id="content">
+    <h1>Hello World</h1>
+</div>
+
+<h1>Opis</h1>
+<input type="number" id="a">
+    <input type="number" id="b">
+
+    <br>
+    <br>
+    <br>
+    <div id="squares"></div>
+
+    <button onclick="handleClick()">Click</button>
+    <button onclick="handleClickOnContent()">Content click</button>
+<button onclick="handleClickOnHeader()">Header click</button>
+<button onclick="handleClickCreateSquare()">Add Square</button>
+<button onclick="handleClickUpdateParagraphs()">Update</button>
+
+    <script>
+    function handleClick() {
+        var aInput = document.getElementById('a');
+        var bInput = document.getElementById('b');
+
+        alert(parseInt(aInput.value) + parseInt(bInput.value));
+    }
+
+function handleClickOnContent() {
+    document.getElementById('content').style.backgroundColor = 'red';
+}
+
+function handleClickOnHeader() {
+    document.getElementById('content')
+        .getElementsByTagName('h1')[0].innerText = 'Hello world from javascript';
+}
+
+var i = 1;
+
+function handleClickCreateSquare() {
+    var p = document.createElement('p');
+    p.innerText = `test ${i}`;
+    i++;
+    document.getElementById('squares').appendChild(p);
+}
+
+function handleClickUpdateParagraphs() {
+    var paragraphs = document.getElementById('squares').getElementsByTagName('p');
+    for (j = 0; j < paragraphs.length; j++) {
+        paragraphs[j].style.fontWeight = 'bold';
+    }
+    // paragraphs.forEach(function(e) {
+    //     e.style.fontWeight = 'bold';
+    // })
+}
+</script>
+
+<!--<script>-->
+
+<!--alert('hello world');-->
+<!--console.log('Ala ma kota')-->
+
+<!--result = 2 + 3;-->
+<!--a = 2;-->
+<!--b = 7;-->
+
+<!--name1 = 'Szymon';-->
+<!--name2 = 'Anna';-->
+
+<!--if (name1 === 'Szymon') {-->
+
+<!--}-->
+
+<!--user = {-->
+<!--firstName: 'Szymon',-->
+<!--lastName: 'Nowak',-->
+<!--items: ['Ala', 'ma', 'kota', 'i', '2', 'psy']-->
+<!--};-->
+
+<!--names = ['Anna', 'Jan', 'Karolina'];-->
+
+<!--// user.firstName-->
+
+<!--function showArray(array) {-->
+<!--var result = '';-->
+<!--for (i = 0; i < array.length; i++) {-->
+<!--result += array[i] + ' ';-->
+<!--}-->
+<!--console.log(result);-->
+<!--}-->
+
+<!--showArray(user.items);-->
+<!--showArray(names);-->
+
+<!--alert(a + b);-->
+
+<!--</script>-->
+<!--<script src="scratch_2.js"></script>-->
+
+
+    </body>
+    </html>
