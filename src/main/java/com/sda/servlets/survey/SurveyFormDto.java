@@ -36,6 +36,23 @@ public class SurveyFormDto {
         return surveyFormDto;
     }
 
+    public Survey toDomain() {
+        return Survey.builder()
+                .title(this.title)
+                .description(this.description)
+                .questions(mapToList(questions))
+                .build();
+    }
+
+    private List<SurveyQuestion> mapToList(Map<String, SurveyQuestion> questions) {
+        List<SurveyQuestion> list = new ArrayList<>();
+        for (Map.Entry<String, SurveyQuestion> entry : questions.entrySet()) {
+            int index = Integer.valueOf(entry.getKey()) - 1;
+            list.add(index, entry.getValue());
+        }
+        return list;
+    }
+
     private static void handleRestOfParameter(SurveyQuestion surveyQuestion, String key, String value) {
         if ("text".equals(key)) {
             surveyQuestion.setText(value);

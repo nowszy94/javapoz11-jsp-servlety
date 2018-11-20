@@ -79,7 +79,7 @@
 
     <servlet>
         <servlet-name>SurveysServlet</servlet-name>
-        <jsp-file>/survey/surveys.jsp</jsp-file>
+        <servlet-class>com.sda.servlets.survey.SurveysServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SurveysServlet</servlet-name>

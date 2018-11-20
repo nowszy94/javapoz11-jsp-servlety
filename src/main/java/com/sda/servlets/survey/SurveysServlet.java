@@ -22,6 +22,8 @@ public class SurveysServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        Survey survey = SurveyFormDto.fromRequest(req).toDomain();
+        surveyService.save(survey);
+        resp.sendRedirect(req.getContextPath() + req.getServletPath());
     }
 }

@@ -44,10 +44,8 @@ public class SurveyService {
     }
 
     private void init() {
-        surveyList.add(Survey.builder().id(1).title("Stan powietrza w Poznaniu").build());
-        surveyList.add(Survey.builder().id(2).title("Zmiana na czas zimowy").build());
-        surveyList.add(Survey.builder().id(3).title("Drogi dojazdowe do Poznania").build());
+        save(Survey.builder().title("Stan powietrza w Poznaniu").build());
+        save(Survey.builder().title("Zmiana na czas zimowy").build());
+        save(Survey.builder().title("Drogi dojazdowe do Poznania").build());
     }
-
-
 }
