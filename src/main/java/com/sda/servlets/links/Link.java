@@ -46,4 +46,13 @@ public class Link {
     public String getText() {
         return text;
     }
+
+    @Override
+    public String toString() {
+        return "Link{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }
