@@ -28,9 +28,13 @@
 <ul>
     <%
         List<Survey> surveys = surveyService.findAll();
+        String pathToSurveys = request.getAttribute("javax.servlet.forward.request_uri") + "/";
         for (Survey survey : surveys) {
     %>
-    <li><%= survey.getTitle() %>
+    <li>
+        <a href="<%= pathToSurveys + survey.getId() %>">
+            <%= survey.getTitle() %>
+        </a>
     </li>
     <% } %>
 </ul>

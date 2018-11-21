@@ -43,6 +43,13 @@ public class SurveyService {
         }
     }
 
+    public Survey findById(Integer surveyId) throws SurveyDoesNotExistsException {
+        return surveyList.stream()
+                .filter(e -> e.getId().equals(surveyId))
+                .findAny()
+                .orElseThrow(() -> new SurveyDoesNotExistsException(surveyId + ""));
+    }
+
     private void init() {
         save(Survey.builder().title("Stan powietrza w Poznaniu").build());
         save(Survey.builder().title("Zmiana na czas zimowy").build());

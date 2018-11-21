@@ -83,7 +83,16 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SurveysServlet</servlet-name>
-        <url-pattern>/surveys</url-pattern>
+        <url-pattern>/surveys/*</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>SurveyFilter</filter-name>
+        <filter-class>com.sda.servlets.survey.SurveyFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SurveyFilter</filter-name>
+        <url-pattern>/surveys</url-pattern>
+    </filter-mapping>
 </web-app>
