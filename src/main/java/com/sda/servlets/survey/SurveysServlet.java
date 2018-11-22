@@ -19,21 +19,7 @@ public class SurveysServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getPathInfo();
-        if (StringUtils.isEmpty(pathInfo) || "/".equals(pathInfo)) {
-            req.getRequestDispatcher("survey/surveys.jsp").forward(req, resp);
-        } else {
-            Integer surveyId = Integer.valueOf(pathInfo.substring(1));
-            Survey survey = null;
-            try {
-                survey = surveyService.findById(surveyId);
-                req.setAttribute("survey", survey);
-                req.getRequestDispatcher("survey/survey.jsp").forward(req, resp);
-            } catch (SurveyDoesNotExistsException e) {
-                req.getRequestDispatcher("survey/survey-not-found.jsp").forward(req, resp);
-                resp.setStatus(404);
-            }
-        }
+        req.getRequestDispatcher("survey/surveys.jsp").forward(req, resp);
     }
 
     @Override

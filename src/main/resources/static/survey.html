@@ -1,20 +1,3 @@
-<%@ page import="com.sda.servlets.survey.Survey" %>
-<%@ page import="com.sda.servlets.survey.SurveyService" %>
-<%@ page import="org.apache.commons.lang3.StringUtils" %>
-<%@ page import="com.sda.servlets.survey.SurveyQuestion" %><%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 20.11.2018
-  Time: 18:17
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%! SurveyService surveyService = SurveyService.instanceOf(); %>
-<%
-    String path = (String) request.getAttribute("javax.servlet.forward.request_uri");
-    Integer surveyId = Integer.valueOf(StringUtils.substringAfterLast(path, "/"));
-    Survey survey = surveyService.findById(surveyId);
-%>
 <html>
 <head>
 
@@ -82,15 +65,11 @@
             display: flex;
             justify-content: center;
         }
+
         #content {
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-        .new-question-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -99,27 +78,72 @@
     <div class="survey-container">
         <div class="survey-header">
             <div class="survey-title">
-                <h1><%= survey.getTitle() %></h1>
+                <h1>Tytul ankiety</h1>
             </div>
-            <h6><%= survey.getDescription() %></h6>
+            <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae doloribus dolorum esse fugiat hic
+                itaque
+                neque nisi sit sunt voluptatem.</h6>
         </div>
         <div class="survey-questions">
-            <% for (SurveyQuestion question : survey.getQuestions()) { %>
             <div class="survey-question">
                 <div class="survey-question-header">
-                    <h4><%= question.getText() %></h4>
+                    <h4>Tytul pytania 1</h4>
                 </div>
                 <ul>
-                    <% for (String answer : question.getAnswers()) { %>
-                        <li><%= answer %></li>
-                    <% } %>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
                 </ul>
             </div>
-            <% } %>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytul pytania 2</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytul pytania 3</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytul pytania 4</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytul pytania 5</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div>
-        <form class="new-question-form" action="<%= path + "/answers" %>" method="post">
+    <div class="new-question-form">
+        <form action="" method="post">
             <div>
                 Text: <input type="text" name="text">
             </div>

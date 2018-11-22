@@ -56,15 +56,11 @@
 <script>
     var questionId = 1;
 
-    function removeQuestion(e) {
-        e.element
-    }
-
     function addQuestion() {
         var question = document.createElement('div');
         question.className = 'form';
         question.innerHTML = `
-            <h2>Question\${questionId}: <span onclick="removeQuestion(event)">Usun</span></h2>
+            <h2>Question\${questionId}:</h2>
             <div>
                 Text: <input type="text" name="question\${questionId}text">
             </div>
